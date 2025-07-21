@@ -21,7 +21,7 @@ public class CustomerJDBCDAOService implements CustomerDAO {
 
     @Override
     public void deleteCustomerById(Integer id) {
-        var sql = "DELETE FROM customer WHERE id = ?";
+        var sql = "DELETE FROM customer WHERE email = ?";
         jdbcTemplate.update(sql, id);
     }
 
