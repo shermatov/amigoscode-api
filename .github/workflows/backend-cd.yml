@@ -52,9 +52,11 @@ jobs:
         run: |
           echo "Dockerrun.aws.json before updating seg"
           cat Dockerrun.aws.json
-          sed -i -E 's_(shermatov/amigoscode-api:)([^"]*)_\1'${{ steps.build-number.outputs.BUILD_NUMBER}}'_' Dockerrun.aws.json
+          sed -i -E "s_(shermatov/amigoscode-api:)([^\"]*)_\1${{ steps.build-number.outputs.BUILD_NUMBER }}_" Dockerrun.aws.json
           echo "Dockerrun.aws.json after updating seg"
-
+          cat Dockerrun.aws.json
+      
+      
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
