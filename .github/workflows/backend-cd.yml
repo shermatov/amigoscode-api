@@ -59,7 +59,8 @@ jobs:
           --data '
             {"text":":maven: Building with Maven"}
           '
-          &{{secrets.SLACK_WEBHOOK_URL}}
+          
+          ${{secrets.SLACK_WEBHOOK_URL}}
 
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{ steps.build-number.outputs.BUILD_NUMBER}} jib:build
@@ -70,7 +71,7 @@ jobs:
           --data '
             {"text":":docker: Image tag :${{ steps.build-number.outputs.BUILD_NUMBER}} pushed to https://hub.docker.com/repository/docker/shermatov/amigoscode-api"}
           '
-          &{{secrets.SLACK_WEBHOOK_URL}}
+          ${{secrets.SLACK_WEBHOOK_URL}}
 
 
       - name: Update Dockerrun.aws.json api image tag with build number
@@ -87,7 +88,7 @@ jobs:
           --data '
             {"text":":aws: Starting deployment to Elastic Beanstalk"}
           '
-          &{{secrets.SLACK_WEBHOOK_URL}}
+          ${{secrets.SLACK_WEBHOOK_URL}}
       
 
       - name: Deploy to Elastic Beanstalk
@@ -112,7 +113,7 @@ jobs:
           --data '
             {"text":":githubloading: Commiting to repo https://github.com/shermatov/amigoscode-api"}
           '
-          &{{secrets.SLACK_WEBHOOK_URL}}
+          ${{secrets.SLACK_WEBHOOK_URL}}
 
       - name: Commit and push Dockerrun.aws.json
         run: |
@@ -128,7 +129,7 @@ jobs:
           --data '
             {"text":"Deployment and commit completed :github_check_mar: :party_blob: - ${{secrets.EB_ENVIRONMENT_URL}}"}
           '
-          &{{secrets.SLACK_WEBHOOK_URL}}
+          ${{secrets.SLACK_WEBHOOK_URL}}
 
       - name: Send Slack Message
         run: >
@@ -136,7 +137,7 @@ jobs:
           --data '
             {"text":"Job Status ${{job.status}}"}
           '
-          &{{secrets.SLACK_WEBHOOK_URL}}
+          ${{secrets.SLACK_WEBHOOK_URL}}
           
       
 
