@@ -30,9 +30,11 @@ jobs:
         working-directory: ./backend
     steps:
       - name: Send Slack Message - Start
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"Deployment started postgres_bar :fingerscrossed:"}' \
+        run: >
+          curl && curl -X POST -H 'Content-type: application/json' 
+          --data '
+            {"text":"Deployment started postgres_bar :fingerscrossed:"}
+          ' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - uses: actions/checkout@v4
@@ -52,18 +54,23 @@ jobs:
         run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT
 
       - name: Send Slack Message - Maven Build
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":":maven: Building with Maven"}' \
+        run: >
+          curl && curl -X POST -H 'Content-type: application/json' 
+          --data '
+            {"text":":maven: Building with Maven"}
+          ' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{ steps.build-number.outputs.BUILD_NUMBER}} jib:build
 
       - name: Send Slack Message - Docker Push
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":":docker: Image tag :${{ steps.build-number.outputs.BUILD_NUMBER }} pushed to https://hub.docker.com/repository/docker/shermatov/amigoscode-api"}' \
+        run: >
+          curl && curl -X POST -H 'Content-type: application/json' 
+          --data '
+            {"text":":docker: Image tag :${{ steps.build-number.outputs.BUILD_NUMBER }} pushed to https://hub.docker.com/repository/docker/shermatov/amigoscode-api"}
+          '
+          
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
@@ -76,9 +83,11 @@ jobs:
           cat Dockerrun.aws.json
 
       - name: Send Slack Message - Deploy to Beanstalk
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":":aws: Starting deployment to Elastic Beanstalk"}' \
+        run: >
+          curl && curl -X POST -H 'Content-type: application/json' 
+          --data '
+            {"text":":aws: Starting deployment to Elastic Beanstalk"}
+          ' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
       
 
@@ -99,9 +108,11 @@ jobs:
 
 
       - name: Send Slack Message - Commit Info
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":":githubloading: Committing to repo https://github.com/shermatov/amigoscode-api"}' \
+        run: > 
+          curl && curl -X POST -H 'Content-type: application/json' 
+          --data '
+            {"text":":githubloading: Committing to repo https://github.com/shermatov/amigoscode-api"}
+          ' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Commit and push Dockerrun.aws.json
@@ -113,15 +124,19 @@ jobs:
           git push
 
       - name: Send Slack Message - Deployment Done
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"Deployment and commit completed :github_check_mar: :party_blob: - ${{ secrets.EB_ENVIRONMENT_URL }}"}' \
+        run: >
+          curl && curl -X POST -H 'Content-type: application/json' 
+          --data '
+            {"text":"Deployment and commit completed :github_check_mar: :party_blob: - ${{ secrets.EB_ENVIRONMENT_URL }}"}
+          ' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send Slack Message - Job Status
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"Job Status: ${{ job.status }}"}' \
+        run: >
+          curl && curl -X POST -H 'Content-type: application/json' 
+          --data '
+            {"text":"Job Status: ${{ job.status }}"}
+          ' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
 
           
