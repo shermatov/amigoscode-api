@@ -58,7 +58,7 @@ jobs:
       
       
 
-      - name: Deploy to Elastic Beanstalk
+      - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
