@@ -33,9 +33,10 @@ jobs:
         run: >
           curl && curl -X POST -H 'Content-type: application/json'
           --data '
-            {"text":"Deployment started postgress_bar: :fingerscrossed:"}
+            {"text":"Deployment started postgres_bar: :fingerscrossed:"}
           '
           &{{secrets.SLACK_WEBHOOK_URL}}
+
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
