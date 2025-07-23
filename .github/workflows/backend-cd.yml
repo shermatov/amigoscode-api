@@ -29,12 +29,11 @@ jobs:
       run:
         working-directory: ./backend
     steps:
-      - name: Send Slack Message
+      - name: Send Slack Message - Start
         run: |
           curl -X POST -H 'Content-type: application/json' \
           --data '{"text":"Deployment started postgres_bar :fingerscrossed:"}' \
           ${{ secrets.SLACK_WEBHOOK_URL }}
-      
 
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -53,19 +52,23 @@ jobs:
         run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT
 
       - name: Send Slack Message
-        run: |
-          curl && curl -X POST -H 'Content-type: application/json'\
-          --data '{"text":":maven: Building with Maven"}'\
+        run: >
+          curl && curl -X POST -H 'Content-type: application/json'
+          --data '
+            {"text":":maven: Building with Maven"}
+          '
+          
           ${{secrets.SLACK_WEBHOOK_URL}}
 
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{ steps.build-number.outputs.BUILD_NUMBER}} jib:build
 
       - name: Send Slack Message
-        run: |
-          curl && curl -X POST -H 'Content-type: application/json'\
-          --data '{"text":":docker: Image tag :${{ steps.build-number.outputs.BUILD_NUMBER}} pushed to https://hub.docker.com/repository/docker/shermatov/amigoscode-api"}'\
-          
+        run: >
+          curl && curl -X POST -H 'Content-type: application/json'
+          --data '
+            {"text":":docker: Image tag :${{ steps.build-number.outputs.BUILD_NUMBER}} pushed to https://hub.docker.com/repository/docker/shermatov/amigoscode-api"}
+          '
           ${{secrets.SLACK_WEBHOOK_URL}}
 
 
