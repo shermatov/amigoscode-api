@@ -56,7 +56,6 @@ jobs:
           echo "Dockerrun.aws.json after updating seg"
           cat Dockerrun.aws.json
       
-      
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
