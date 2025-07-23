@@ -26,7 +26,6 @@ public class CustomerService {
                         () -> new ResourceNotFoundException("Customer with [%s] not found".formatted(customerID)
                         )
                 );
-
     }
 
 
@@ -48,8 +47,6 @@ public class CustomerService {
             throw new ResourceNotFoundException("Customer with [%s] not found".formatted(customerID));
         }
         customerDAO.deleteCustomerById(customerID);
-
-
     }
 
     public void updateCustomer(Integer customerID, CustomerUpdateRequest updateRequest) {
