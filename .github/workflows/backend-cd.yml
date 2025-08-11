@@ -29,10 +29,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Slack commit message and sha
-        run: >
-          curl -X POST -H "Content-type: application/json" \
-          --data "{\"text\":\"Github: https://github.com/shermatov/amigoscode-api/commit/${{ github.sha }} - ${{ github.event.head_commit.message }}\"}" \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST \
+            -H "Content-type: application/json" \
+            --data "{\"text\":\"Github: https://github.com/shermatov/amigoscode-api/commit/${{ github.sha }} - ${{ github.event.head_commit.message }}\"}" \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+      
       
 
       - name: Send Slack Message - Start
