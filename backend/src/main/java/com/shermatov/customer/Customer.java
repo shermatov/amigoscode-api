@@ -49,6 +49,7 @@ public class Customer {
     )
     private Integer id;
 
+
     @Column(nullable = false )
     private String name;
 
