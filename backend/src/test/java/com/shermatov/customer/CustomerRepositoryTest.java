@@ -28,8 +28,8 @@ class CustomerRepositoryTest extends AbstractTestcontainersUnitTest {
         customer = new Customer(
                 firstName + " " + lastName,
                 firstName + "_" + lastName + "@shermatov.com",
-                RANDOM.nextInt(100) + 2
-        );
+                RANDOM.nextInt(100) + 2,
+                Gender.MALE);
         System.out.println(applicationContext.getBeanDefinitionCount());
     }
 
