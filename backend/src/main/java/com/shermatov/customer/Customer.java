@@ -29,6 +29,7 @@ public class Customer {
         this.gender = gender;
     }
 
+
     public Customer(Integer id, String name, String email, Integer age, Gender gender) {
         this.age = age;
         this.email = email;
@@ -36,7 +37,6 @@ public class Customer {
         this.name = name;
         this.gender = gender;
     }
-
     @Id
     @SequenceGenerator(
             name = "customer_id_seq",
@@ -48,6 +48,7 @@ public class Customer {
             generator = "customer_id_seq"
     )
     private Integer id;
+
 
     @Column(nullable = false )
     private String name;

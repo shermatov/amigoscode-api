@@ -28,7 +28,6 @@ public class AmigoscodeApiApplication {
             int age = random.nextInt(100) + 2;
             Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
-
             Customer customer = new Customer(
                     firstName + " " + lastName,
                     firstName + "_" + lastName + "@shermatov.com",
