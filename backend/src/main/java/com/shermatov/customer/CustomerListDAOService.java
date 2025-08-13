@@ -16,14 +16,16 @@ public class CustomerListDAOService implements CustomerDAO {
                 1,
                 "Alex",
                 "alex@gmail.com",
-                19
+                19,
+                Gender.MALE
 
         );
         Customer jamila = new Customer(
                 2,
                 "Jamila",
                 "jamila@gmail.com",
-                23
+                23,
+                Gender.FEMALE
         );
 
         customers.add(alex);

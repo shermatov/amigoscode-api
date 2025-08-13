@@ -11,7 +11,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Table (
         name = "customer",
         uniqueConstraints = {
@@ -23,10 +22,19 @@ import java.util.Objects;
 )
 public class Customer {
 
-    public Customer(String name, String email, Integer age) {
+    public Customer(String name, String email, Integer age, Gender gender) {
         this.name = name;
         this.email = email;
         this.age = age;
+        this.gender = gender;
+    }
+
+    public Customer(Integer id, String name, String email, Integer age, Gender gender) {
+        this.age = age;
+        this.email = email;
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
     }
 
     @Id
@@ -49,6 +57,11 @@ public class Customer {
 
     @Column(nullable = false)
     private Integer age;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
 
     @Override
     public final boolean equals(Object o) {
