@@ -20,6 +20,7 @@ class CustomerRowMapperTest {
         when(resultSet.getString("name")).thenReturn("John");
         when(resultSet.getString("email")).thenReturn("john@example.com");
         when(resultSet.getInt("age")).thenReturn(25);
+        when(resultSet.getString("gender")).thenReturn("MALE");
 
         CustomerRowMapper rowMapper = new CustomerRowMapper();
 
@@ -27,11 +28,12 @@ class CustomerRowMapperTest {
         Customer actual = rowMapper.mapRow(resultSet, 1);
 
         // Then
-        Customer expected = new Customer(1, "John", "john@example.com", 25);
+        Customer expected = new Customer(1, "John", "john@example.com", 25, Gender.FEMALE);
         assert actual != null;
         assertThat(actual.getId()).isEqualTo(1);
         assertThat(actual.getName()).isEqualTo("John");
         assertThat(actual.getEmail()).isEqualTo("john@example.com");
         assertThat(actual.getAge()).isEqualTo(25);
+        assertThat(actual.getGender()).isEqualTo(Gender.MALE);
     }
 }

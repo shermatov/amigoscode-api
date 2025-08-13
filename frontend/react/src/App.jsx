@@ -2,7 +2,6 @@ import SidebarWithHeader from "./components/shared/SideBar.jsx";
 import {useEffect, useState} from "react";
 import {getCustomers} from "./services/client.js";
 import {
-    Center,
     Spinner,
     Text,
     Wrap,
@@ -56,7 +55,10 @@ function App() {
             <Wrap spacing='30px' justify='center'>
                 {customers.map((customer, index) => (
                     <WrapItem key={index}>
-                        <CartWithImage {...customer}/>
+                        <CartWithImage
+                            {...customer}
+                        imageNumber={index}
+                        />
                     </WrapItem>
                 ))}
             </Wrap>

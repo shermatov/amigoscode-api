@@ -47,7 +47,8 @@ class CustomerServiceTest {
                 customerId,
                 "ali",
                 "Ali@gmail.com",
-                15
+                15,
+                Gender.MALE
         );
         Mockito.when(customerDAO.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -82,8 +83,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 "ali",
                 email,
-                12
-        );
+                12,
+                Gender.MALE);
         // When
         underTest.addCustomer(request);
 
@@ -108,8 +109,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 "ali",
                 email,
-                12
-        );
+                12,
+                Gender.MALE);
         // When
 
         assertThatThrownBy(() -> underTest.addCustomer(request))
@@ -160,7 +161,8 @@ class CustomerServiceTest {
                 customerId,
                 "ali",
                 "ali@gmail.com",
-                15
+                15,
+                Gender.MALE
         );
         String email = "aibek@gmail.com";
 
@@ -191,7 +193,8 @@ class CustomerServiceTest {
                 customerId,
                 "ali",
                 "ali@gmail.com",
-                15
+                15,
+                Gender.MALE
         );
 
 
@@ -223,7 +226,8 @@ class CustomerServiceTest {
                 customerId,
                 "ali",
                 "ali@gmail.com",
-                15
+                15,
+                Gender.MALE
         );
 
 
@@ -256,7 +260,8 @@ class CustomerServiceTest {
                 customerId,
                 "ali",
                 "ali@gmail.com",
-                15
+                15,
+                Gender.MALE
         );
 
 
@@ -291,7 +296,8 @@ class CustomerServiceTest {
                 customerId,
                 "ali",
                 "ali@gmail.com",
-                15
+                15,
+                Gender.MALE
         );
 
 
@@ -321,7 +327,8 @@ class CustomerServiceTest {
                 customerId,
                 "ali",
                 "ali@gmail.com",
-                15
+                15,
+                Gender.MALE
         );
 
 

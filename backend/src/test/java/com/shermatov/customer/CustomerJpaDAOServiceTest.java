@@ -54,8 +54,8 @@ class CustomerJpaDAOServiceTest {
         Customer customer = new Customer(
                 "ali",
                 "ali@gmail.com",
-                15
-        );
+                15,
+                Gender.MALE);
 
         // When
         underTest.insertCustomer(customer);
@@ -106,8 +106,8 @@ class CustomerJpaDAOServiceTest {
         Customer customer = new Customer(
                 "ali",
                 "ali@gmail.com",
-                15
-        );
+                15,
+                Gender.MALE);
 
         // When
         underTest.updateCustomer(customer);

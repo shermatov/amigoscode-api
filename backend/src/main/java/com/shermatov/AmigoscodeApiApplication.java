@@ -2,6 +2,7 @@ package com.shermatov;
 
 import com.shermatov.customer.Customer;
 import com.shermatov.customer.CustomerRepository;
+import com.shermatov.customer.Gender;
 import net.datafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,12 +25,15 @@ public class AmigoscodeApiApplication {
             Random random = new Random();
             String lastName = faker.name().lastName();
             String firstName = faker.name().firstName();
+            int age = random.nextInt(100) + 2;
+            Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
 
             Customer customer = new Customer(
                     firstName + " " + lastName,
                     firstName + "_" + lastName + "@shermatov.com",
-                    random.nextInt(100) + 2
-            );
+                    age,
+                    gender);
 
             customerRepository.save(customer);
         };
