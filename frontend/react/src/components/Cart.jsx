@@ -12,16 +12,25 @@ import {
     Tag,
     useColorModeValue,
 } from '@chakra-ui/react'
+import React from 'react';
 
-export default function CartWithImage({id, name, email, age, gender, imageNumber}) {
+import UpdateCustomerDrawer from "./UpdateCustomerDrawer.jsx";
+import DeleteCustomer from "./DeleteCustomer.jsx";
+
+export default function CartWithImage({id, name, email, age, gender, imageNumber, fetchCustomers}) {
     const randomUserGender = gender === 'MALE' ? 'men' : 'women'
+
+
+
     return (
         <Center py={6}>
             <Box
-                maxW={'270px'}
+                maxW={'300px'}
+                minW={'300px'}
                 w={'full'}
+                m={2}
                 bg={useColorModeValue('white', 'gray.800')}
-                boxShadow={'2xl'}
+                boxShadow={'lg'}
                 rounded={'md'}
                 overflow={'hidden'}>
                 <Image
@@ -52,10 +61,31 @@ export default function CartWithImage({id, name, email, age, gender, imageNumber
                             {name}
                         </Heading>
                         <Text color={'gray.500'}>{email}</Text>
-                        <Text color={'gray.500'}>{age} | {gender}</Text>
+                        <Text color={'gray.500'}> Age: {age} | {gender}</Text>
+
+
                     </Stack>
 
                 </Box>
+                <Stack direction={'row'} spacing={6} justify={'center'} p={2}>
+                    <Stack>
+                        <UpdateCustomerDrawer
+                            initialValues={{name, email, age}}
+                            customerId={id}
+                            fetchCustomers={fetchCustomers}
+                        />
+
+                    </Stack>
+
+                    <Stack>
+                        <DeleteCustomer
+                            fetchCustomers={fetchCustomers}
+                            customerId={id}
+                            name={name}
+                        />
+                    </Stack>
+
+                </Stack>
             </Box>
         </Center>
     )

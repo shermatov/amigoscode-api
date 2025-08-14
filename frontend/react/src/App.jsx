@@ -1,6 +1,9 @@
 import SidebarWithHeader from "./components/shared/SideBar.jsx";
 import {useEffect, useState} from "react";
 import {getCustomers} from "./services/client.js";
+
+import CreateCustomerDrawer from "./components/CreateCustomerDrawer.jsx";
+
 import {
     Spinner,
     Text,
@@ -9,23 +12,32 @@ import {
 } from "@chakra-ui/react";
 
 import CartWithImage from "./components/Cart.jsx";
+import {errorNotification} from "./services/notification.js";
 
 function App() {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
+    const fetchCustomers = () => {
         setLoading(true)
-
-        setTimeout(() => {
+        setTimeout(() =>
             getCustomers().then((response) => {
                 setCustomers(response.data);
             }).catch((error) => {
-                console.log(error);
+                errorNotification(
+                    error.code,
+                    error.response.data.message,
+                );
             }).finally(() => {
                 setLoading(false);
-            })
-        }, 1000)
+            }), 2000
+        )
+
+    }
+
+    useEffect(() => {
+        fetchCustomers()
+
     }, [])
 
     if (loading) {
@@ -45,19 +57,26 @@ function App() {
     if (customers.length <= 0) {
         return (<SidebarWithHeader>
             <Text>
-                No Customers available
+                <CreateCustomerDrawer
+                    fetchCustomers={fetchCustomers}
+                />
             </Text>
+            <Text textAlign='center'>There is no customer found</Text>
         </SidebarWithHeader>)
     }
 
     return (
         <SidebarWithHeader>
+            <CreateCustomerDrawer
+                fetchCustomers={fetchCustomers}
+            />
             <Wrap spacing='30px' justify='center'>
                 {customers.map((customer, index) => (
                     <WrapItem key={index}>
                         <CartWithImage
                             {...customer}
-                        imageNumber={index}
+                            imageNumber={index}
+                            fetchCustomers={fetchCustomers}
                         />
                     </WrapItem>
                 ))}
