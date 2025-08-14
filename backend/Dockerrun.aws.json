@@ -16,15 +16,6 @@
         {
           "name": "SPRING_DATASOURCE_URL",
           "value": "jdbc:postgresql://awseb-e-frcsfrvp5j-stack-awsebrdsdatabase-efenxwgeiqbu.cjuemag2mtn6.eu-central-1.rds.amazonaws.com:5432/customer"
-        },
-
-        {
-          "name": "SPRING_DATASOURCE_USERNAME",
-          "value": "shermatov"
-        },
-        {
-          "name": "SPRING_DATASOURCE_PASSWORD",
-          "value": "superSecret"
         }
       ]
     }
