@@ -75,7 +75,7 @@ public class CustomerIT {
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                 .contains(expectedCustomer);
 
-// Get correct ID from list
+// Get correct ID from List
         assert allCustomers != null;
         int id = allCustomers.stream()
                 .filter(c -> c.getEmail().equals(email))
