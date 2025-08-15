@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "amigoscode-api",
-      "image": "shermatov/amigoscode-api:latest",
+      "image": "shermatov/amigoscode-api:15.08.2025.16.33.21",
       "essential": true,
       "memory": 512,
       "portMappings": [
