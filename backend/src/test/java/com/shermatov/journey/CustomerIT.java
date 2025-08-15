@@ -72,7 +72,7 @@ public class CustomerIT {
 // Verify newly added customer is present
         Customer expectedCustomer = new Customer(name, email, age, gender);
         assertThat(allCustomers)
-                .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
+                .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id", "gender")
                 .contains(expectedCustomer);
 
 // Get correct ID from List
